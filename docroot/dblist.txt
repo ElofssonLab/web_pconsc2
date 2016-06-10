@@ -1,0 +1,3 @@
+DB_HHBLITS   /data3/data/hhsuite/uniprot20_2015_06/uniprot20_2015_06
+DB_HMMER     /data3/data/blastdb/uniref90.fasta
+DB_BLAST     /data3/data/blastdb/uniref90.fasta

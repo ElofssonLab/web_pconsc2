@@ -1,0 +1,21 @@
+<tr><td>
+    <h4>Date 2015-09-23</h4>
+    The computational node for PconsC2 is fixed now. The queued jobs will be
+    run gradually. However, this may take some time since we have limited
+    resources at the moment. We are trying to allocate more resource soon.
+</td></tr>
+
+<tr><td>
+    <h4>Date 2015-09-09</h4>
+    We regret to inform you that all jobs currently submitted to the 
+    PconsC2 web-server are suspended due to the shutdown of the cloud 
+    cluster. We will move our computational node to a new cluster and 
+    the jobs submitted will stay in the queue.
+</td></tr>
+
+<tr><td>
+    <h4>Date 2015-03-10</h4>
+    The PconC2 web-server is back to work now. All jobs will be run according to the 
+    QueueRank. Due to the limitation of our computational resource, it may take quite long time
+    before your job is finished.
+</td></tr>

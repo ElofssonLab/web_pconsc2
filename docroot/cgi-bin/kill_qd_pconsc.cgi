@@ -1,0 +1,74 @@
+#!/usr/bin/perl -w
+# Filename:  kill_qd_pconsc.cgi
+# Description: kill qd_pconsc.pl
+# Created 2014-07-01, updated 2014-07-01, Nanjiang Shu
+
+use CGI qw(:standard);
+use CGI qw(:cgi-lib);
+use CGI qw(:upload);
+
+use Cwd 'abs_path';
+use File::Basename;
+my $rundir = dirname(abs_path(__FILE__));
+my $basedir = "$rundir/../";
+
+my $projectname = "";
+my $search_word = "";
+if ($rundir =~ /debug/){
+    $projectname = "debug.pconsc";
+    $search_word = "debug";
+}else{
+    $projectname = "pconsc";
+    $search_word = "release";
+}
+my $target_progname = "qd_pconsc.pl";
+
+print header();
+print start_html(-title => "Kill $target_progname",
+    -author => "nanjiang.shu\@scilifelab.se",
+    -meta   => {'keywords'=>''});
+
+if(!param())
+{
+    print "Already running daemons:<br>";
+    my $username=`whoami`;
+    my $already_running=`ps aux | grep  "$target_progname" | grep "$search_word" | grep -v grep |grep -v archive_logfile | grep $username`;
+    my $num_already_running = `echo "$already_running" | grep "$target_progname"  | wc -l`;
+    chomp($num_already_running);
+    print "<pre>";
+    print $already_running;
+    print "</pre>";
+    print "num_already_running=$num_already_running<br>";
+    print '<br>';
+    print '<br>';
+    if ($num_already_running > 0){
+        my $ps_info = `ps aux | grep "$target_progname" | grep "$search_word" | grep -v grep | grep -v archive_logfile | grep $username`;
+        my @lines = split('\n', $ps_info);
+        my @pidlist = ();
+        foreach my $line  (@lines){
+            chomp($line);
+            my @fields = split(/\s+/, $line);
+#             print "scalar \@fields =". scalar @fields . "<br>\$fields[1]=" . $fields[1]. "<br>line=".$line . "<br>"; #debug
+            if (scalar @fields > 2 && $fields[1] =~ /[0-9]+/){
+                push (@pidlist, $fields[1]);
+            }
+        }
+#         print "scalar \@pidlist=".scalar @pidlist."<br>"; #debug
+        print 'killing.... <br>';
+        foreach my $pid (@pidlist){
+            print "kill -9 $pid<br>";
+            system("kill -9 $pid");
+        }
+        print '<BR>';
+        print '<BR>';
+    }
+    $already_running=`ps aux | grep  "$target_progname" | grep "$search_word" | grep -v grep | grep $username`;
+    print "Running daemons after killing:<br>";
+    print "<pre>";
+    print $already_running;
+    print "</pre>";
+    print '<br>';
+    print '<br>';
+    print "$target_progname killed";
+    print end_html();
+}
