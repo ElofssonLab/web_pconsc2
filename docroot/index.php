@@ -47,39 +47,53 @@ if(isset($_POST{'user_domain_submission'}))
   $target_name=$_POST{'name'};
 }
 
-$submission_form="
-    <table>
-        <tr>
-            <td class=\"contentheading\" width=\"100%\">Protein Residue-Residue Contact Prediction Server Submission Page</td>
-        </tr>
-        <tr></tr>
-    </table>
+# $submission_form="
+#     <table>
+#         <tr>
+#             <td class=\"contentheading\" width=\"100%\">Protein Residue-Residue Contact Prediction Server Submission Page</td>
+#         </tr>
+#         <tr></tr>
+#     </table>
+# 
+#     <table class=\"contentpaneopen\">
+#         <tr>
+#             <td valign=\"top\" colspan=\"2\">
+#                 Paste in your amino acid sequence in one letter code (at least 30 amino acids)
+#                 <form method=\"post\" name=\"seq_form\">
+#                     <textarea name=\"sequence\" rows=\"10\" cols=\"60\">$sequence</textarea>
+#                     <table> 
+#                         <p>Target name (max 20 chars) <input name=\"name\" value=\"$target_name\" type=\"text\" /> (optional)</p>
+#                         <p>E-mail <input name=\"email\" type=\"text\" /> (optional)</p>
+# 
+#                         <script language=\"javascript\">
+#                         <!--
+#                         document.getElementById(\'options\').style.display = \'none\';
+#                         //-->
+#                         </script>
+# 
+#                         <p> <input type=\"submit\" name=do value=\"Submit\" /> <INPUT type=\"reset\" value=\"Clear\" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type=\"button\" value=\"Generate example input\" onclick=\"example_fill();\"></p>
+#                     </table>
+#                 </form>
+#             </td>
+#         </tr>
+#     </table>
+# $citation
+# ";
 
-    <table class=\"contentpaneopen\">
+$submission_form="
+
+    <table style=\"margin-top: 30px; margin-bottom:200px\">
         <tr>
             <td valign=\"top\" colspan=\"2\">
-                Paste in your amino acid sequence in one letter code (at least 30 amino acids)
-                <form method=\"post\" name=\"seq_form\">
-                    <textarea name=\"sequence\" rows=\"10\" cols=\"60\">$sequence</textarea>
-                    <table> 
-                        <p>Target name (max 20 chars) <input name=\"name\" value=\"$target_name\" type=\"text\" /> (optional)</p>
-                        <p>E-mail <input name=\"email\" type=\"text\" /> (optional)</p>
-
-                        <script language=\"javascript\">
-                        <!--
-                        document.getElementById(\'options\').style.display = \'none\';
-                        //-->
-                        </script>
-
-                        <p> <input type=\"submit\" name=do value=\"Submit\" /> <INPUT type=\"reset\" value=\"Clear\" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type=\"button\" value=\"Generate example input\" onclick=\"example_fill();\"></p>
-                    </table>
-                </form>
+                <font size=4>
+                Please submit your query to our new version of contact prediction server <a href=http://pconsc3.bioinfo.se><b>PconsC3 (http://pconsc3.bioinfo.se)</b></a>
+                for better performance and speed.
+                </font>
             </td>
         </tr>
     </table>
 $citation
 ";
-
 
 if(isset($_POST{'do'}) && $_POST{'do'}=="Submit")/*{{{*/
 {
