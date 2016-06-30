@@ -111,5 +111,4 @@ if (param())
     print "new job ID = $folder_nr";
     $date = strftime "%Y-%m-%d %H:%M:%S", localtime;
     `echo $date > $resultdir/last_submission`;
-    system("$rundir/qd_pconsc.pl");
 }
